@@ -1,0 +1,20 @@
+// css root colors
+:root{
+    --primary-theme : #00378C;
+    --dark-theme : #081538;
+    --secondary-theme : #F6AA32;
+}
+
+// scss color variables
+$theme : var(--primary-theme);
+$dark-theme : var(--dark-theme);
+$sec-theme : var(--secondary-theme);
+
+// display
+@mixin display($flex,$align,$justify,$gap,$dir){
+    display: $flex;
+    align-items: $align;
+    justify-content: $justify;
+    gap: $gap;
+    flex-direction: $dir;
+}
