@@ -9,8 +9,14 @@ export class LoginService {
   private readonly apiUrl = 'https://jsonplaceholder.typicode.com/todos/1'; // Sample API URL
   constructor(private readonly http:HttpClient) { }
   
-  // Method to get posts from the API
-  getPosts(): Observable<any> {
-    return this.http.get(this.apiUrl);
+
+
+  private loginDemo = 'https://dummyjson.com/auth/login'; // Sample API
+
+  // constructor(private http: HttpClient) {}
+
+  login(username: string, password: string): Observable<any> {
+    const body = { username, password };
+    return this.http.post<any>(this.loginDemo, body);
   }
 }
