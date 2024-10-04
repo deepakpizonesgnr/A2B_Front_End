@@ -2,12 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { NGXLogger } from 'ngx-logger';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private readonly http: HttpClient, private route: Router) { }
+  constructor(private readonly http: HttpClient, private route: Router, private logger : NGXLogger) { }
   token: any;
   private loginDemo = 'http://localhost:3000/api/users/login'; // Sample API
 
