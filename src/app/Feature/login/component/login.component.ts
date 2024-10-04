@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../../Core/services/auth.service';
 import { loginConst } from '../const/login-const';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +36,7 @@ export class LoginComponent {
   errorMessage: string | null = null;    // General error message for login
   isLoading: boolean = false;
 
-  constructor(private Auth: AuthService) { }
+  constructor(private Auth: AuthService, private route: Router) { }
 
   onSubmit(): void {
     this.isLoading = true
@@ -43,17 +44,29 @@ export class LoginComponent {
     this.resetErrors();
 
     if (this.isFormValid()) {
-      this.Auth.login(this.userData.username, this.userData.password).subscribe({
+      let json: any = {
+        "username": this.userData.username,
+        "password": this.userData.password
+      }
+      this.Auth.login(json).subscribe({
         next: (response) => {
           console.log('Login successful', response);
           this.errorMessage = null;
           this.errorMessage = 'Login successful.';
           this.isLoading = false;
+          this.Auth.setToken(response.token)
+          this.Auth.token;
+          if (typeof localStorage !== 'undefined') {
+            localStorage.setItem('Token', this.Auth.token)
+          }
+          this.route.navigateByUrl('view/dashboard')
         },
         error: (error) => {
+          if (error['customMessage'] == "Invalid credentials") {
+            this.errorMessage = error['customMessage'];
+          }
           console.log('Login failed', error);
           this.isLoading = false;
-          this.errorMessage = this.loginConst.invalidCred;
         },
       });
     } else {
@@ -64,29 +77,18 @@ export class LoginComponent {
   // Validation logic
   private isFormValid(): boolean {
     const { username, password } = this.userData;
-    let error = 0;
-    if (!username?.trim()) {
-      this.usernameError = this.loginConst.invalidUser;
-      error++;
-    }
-
-    if (!password?.trim()) {
-      this.passwordError = this.loginConst.invalidPass
-      error++;
-    }
-
     if (!username?.trim() && !password?.trim()) {
-      this.errorMessage = this.loginConst.invalidUserAndPass
-      error++;
-    }
-
-    if (error >= 2) {
-      this.usernameError = null;
-      this.passwordError = null;
       this.errorMessage = this.loginConst.invalidUserAndPass;
       return false;
     }
-    if (error == 1) {
+
+    if (!username?.trim()) {
+      this.usernameError = this.loginConst.invalidUser;
+      return false;
+    }
+
+    if (!password?.trim()) {
+      this.passwordError = this.loginConst.invalidPass;
       return false;
     }
     return true;

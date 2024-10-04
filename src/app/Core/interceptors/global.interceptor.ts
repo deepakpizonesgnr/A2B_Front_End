@@ -14,9 +14,13 @@ export default class globalInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         // Handle the error here
         console.error('Interceptor Error: ', error);
+        const modifiedError = {
+          ...error, // copy the existing properties
+          customMessage: error.error.message // add your custom message or property
+        };
 
         // Return an observable with a user-facing error message
-        return throwError(() => new Error('http Something went wrong; please try again later.'));
+        return throwError(() => modifiedError);
       })
     );
   }
