@@ -23,7 +23,6 @@ import { Router } from '@angular/router';
   ]
 })
 export class LoginComponent {
-  private readonly apiUrl = 'https://jsonplaceholder.typicode.com/todos/1'; // Sample API URL
 
   // constructor(private readonly loginServie:LoginService,private readonly http:HttpClient){}
   userData: any = {

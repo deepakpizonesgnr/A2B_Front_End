@@ -1,11 +1,11 @@
-import { Router } from '@angular/router';
 import { CanActivateFn } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { inject } from '@angular/core';
 
 export const AuthGuard: CanActivateFn = (route, state) => {
+    state
+    route
     const authService = inject(AuthService);
-    const router = inject(Router);
 
     // Simulate an async token check, you can replace this with an actual observable if necessary
     let token = authService.getToken();
