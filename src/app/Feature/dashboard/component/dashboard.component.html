@@ -1,1 +1,107 @@
 <p>dashboard works!</p>
+<div class="border-top" style="margin-bottom: 1rem !important;">
+</div>
+@if(OrderDetails){
+  <div class="OrdersInformation">
+       <div class="pending">Pending Orders : {{OrderDetails.pandingOrder}}</div>
+       <div class="pending">Cancle Orders : {{OrderDetails.cancleOrder}} </div>
+       <div class="pending">Complete Orders : {{OrderDetails.completeOrder}} / {{OrderDetails.totalOrder}}</div>
+  </div>
+}
+<div class="parentDiv">
+  <div class="datatable">
+    @if(rows && rows.length > 0 && loding){
+      <div>
+          <h3>Data</h3>
+          <ngx-datatable
+          class="material"
+          [rows]="pagedRows"
+          [loadingIndicator]="loadingIndicator"
+          [columns]="columns"
+          [columnMode]="ColumnMode.standard"
+          [headerHeight]="40"
+          [footerHeight]="30"
+          rowHeight="auto"
+          [reorderable]="reorderable"
+          [scrollbarV]="true"
+          [virtualization]="false"
+          [externalPaging]="true"
+          [count]="page.totalElements"
+          [offset]="page.pageNumber"
+          [limit]="page.size"
+          (page)="setPagination($event)"
+          >
+          <ngx-datatable-column name="Order ID">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row['Order ID'] }}
+            </ng-template>
+          </ngx-datatable-column>
+  
+          <ngx-datatable-column name="Date">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row['Date'] }}
+            </ng-template>
+          </ngx-datatable-column>
+  
+          <ngx-datatable-column name="Customer Name">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row['Customer Name'] }}
+            </ng-template>
+          </ngx-datatable-column>
+  
+          <ngx-datatable-column name="Description">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row['Description'] }}
+            </ng-template>
+          </ngx-datatable-column>
+  
+          <ngx-datatable-column name="Aggregator">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row['Aggregator'] }}
+            </ng-template>
+          </ngx-datatable-column>
+  
+          <ngx-datatable-column name="Location"  [cellClass]="'custom-background'">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row['Location'] }}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Amount">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row['Amount'] }}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Status Order">
+            <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+              <div class="statusAndMenu">
+                <div class="status {{row['Status Order']}}">
+                  {{row['Status Order']}}
+                </div>
+                <div class="Button">
+                  <button (click)="OpenDropDown(rowIndex)">...</button>
+                </div>
+              </div>
+              @if(row.showDropDown){
+                <div class="DropDown">
+                  <button>Accept Order</button>
+                  <button>Reject Order</button>
+                </div>
+              }
+              
+            </ng-template>
+          </ngx-datatable-column>
+          </ngx-datatable>
+      </div>
+  }
+  </div>
+  <div class="Calander">
+    <div class="heading"><h2>Here is Calander data</h2></div>
+    @for (date of datesArray; track date) {
+      <div class="datediv">
+        Day : {{date.Day}} , Date : {{date.Date}} , OrderCount : {{date.OrdersCount}}
+      </div>
+    }
+  </div>
+</div>
+
+
