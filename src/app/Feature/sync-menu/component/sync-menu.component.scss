@@ -1,0 +1,58 @@
+.loading-skeleton p, .loading-skeleton li,
+.loading-skeleton label,
+.loading-skeleton .form-control,
+.loading-skeleton i {
+    color: transparent;
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #eee;
+    border-color: #eee;
+}
+
+.loading-skeleton i{
+    /* margin: 0 5px 0 0; */
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+}
+.loading-skeleton label::placeholder,
+.loading-skeleton .form-control::placeholder {
+    color: transparent;
+}
+.skeleton-view{
+    /* border: 1px solid #eee; */
+    /* border-radius: 5px; */
+    /* padding: 10px; */
+    /* margin-top: 7px; */
+}
+
+.skeleton-container {
+  border: 1px solid #eee;
+  border-radius: 5px;
+  margin-top: 7px;
+}
+
+@keyframes loading-skeleton {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.loading-skeleton {
+    pointer-events: none;
+    animation: loading-skeleton 1s infinite alternate;
+}
+
+.loading-skeleton .form-group {
+  border-right: 1px solid #d8d8d8;
+  width: 100%;
+}
+.loading-skeleton .form-group input {
+  border-radius: 0px;
+  border: 0;
+}
+.loading-skeleton .form-group input:last-child {
+ background-color: #fff;
+}

@@ -5,11 +5,12 @@ import { ColumnMode, NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { Person , DatesInformation , Page , OrderDetails } from '../interrface/dashboard-interface';
 import { dashboardConstant } from '../const/dashboard-const';
 import { dashboardService } from '../dashboard.service';
+import { SaveButtonComponent } from '../../../Shared/UI-Elements/save-button/save-button/save-button.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [AppLoggerModule,NgxDatatableModule],
+  imports: [AppLoggerModule,NgxDatatableModule,SaveButtonComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   providers : [dashboardService,dashboardConstant]
@@ -39,13 +40,11 @@ export class DashboardComponent {
     this.getOrderDetails()
     this.getCalenderData();
     this.setPage();
-    setTimeout(() => {
-      this.loadingIndicator = false;
-    }, 1500);
   }
 
   // Below function is Use for get and set Records
   setPage(){
+    this.loadingIndicator = true;
     this.service.getData().subscribe({
       next: (response : any) => {
         this.rows = response; 
@@ -57,6 +56,7 @@ export class DashboardComponent {
         console.error('Error fetching data:', error);
       },
       complete: () => {
+        this.loadingIndicator = false;
         this.logger.info(this.constant.successfulDataFetched);
       }
     });
@@ -64,6 +64,7 @@ export class DashboardComponent {
 
   // Below function is Use for get and set Calander Data
   getCalenderData(){
+    this.loadingIndicator = true
     this.service.getCalenderData().subscribe({
       next: (response : any) => {
         this.datesArray = response; 
@@ -72,6 +73,7 @@ export class DashboardComponent {
         console.error('Error fetching in calender data:', error);
       },
       complete: () => {
+        this.loadingIndicator = false;
         console.log(this.constant.successfulDataFetched);
       }
     });
@@ -79,6 +81,7 @@ export class DashboardComponent {
 
   // Below function is Use for get and set intial order details
   getOrderDetails(){
+    this.loadingIndicator = true;
     this.service.getOrdersDetail().subscribe({
       next: (response : any) => {
         this.OrderDetails = response; 
@@ -87,6 +90,7 @@ export class DashboardComponent {
         console.error('Error fetching in OrderDetail data:', error);
       },
       complete: () => {
+        this.loadingIndicator = false;
         this.logger.info(this.constant.successfulDataFetched);
       }
     });
