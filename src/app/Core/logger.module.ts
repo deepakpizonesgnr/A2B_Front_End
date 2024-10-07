@@ -9,6 +9,7 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
         serverLogLevel: NgxLoggerLevel.ERROR, // Level of logs to be sent to the server
       }),
     ],
+    exports: [LoggerModule]
   })
 
 export class AppLoggerModule{}
