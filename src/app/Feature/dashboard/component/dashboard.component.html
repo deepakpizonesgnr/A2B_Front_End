@@ -1,13 +1,49 @@
-<p>dashboard works!</p>
-<div class="border-top" style="margin-bottom: 1rem !important;">
-</div>
-@if(OrderDetails){
-  <div class="OrdersInformation">
-       <div class="pending">Pending Orders : {{OrderDetails.pandingOrder}}</div>
-       <div class="pending">Cancle Orders : {{OrderDetails.cancleOrder}} </div>
-       <div class="pending">Complete Orders : {{OrderDetails.completeOrder}} / {{OrderDetails.totalOrder}}</div>
+<div class="dashoard">
+  <div class="header">
+      <div class="brand">
+          <img src="../../../../assets/images/Logotheme.svg" alt="" class="logo">
+          <div class="h-24 capitalize text-white fw-semibold">Dashboard</div>
+      </div>
+      <div class="navigation">
+          <div class="notification">
+              <img src="../../../../assets/images/bell.svg" alt="">
+          </div>
+          <div class="user-block">
+              <img src="../../../../assets/images/user.png" alt="" class="user-img">
+              <div class="username">Adhyan Vishnoi <div class="status">Admin</div>
+              </div>
+          </div>
+      </div>
+      <div class="sidecar-btn">
+          <a href=""><i class="bi bi-list"></i></a>
+      </div>
   </div>
-}
+  <div class="status-menu">
+
+      <div class="status-bar hold">
+          <span>Pending : {{OrderDetails.pandingOrder}}</span>
+      </div>
+      <div class="status-bar cancel">
+          <span>Canceled : {{OrderDetails.cancleOrder}}</span>
+      </div>
+      <div class="status-bar success">
+          <span>Completed : {{OrderDetails.completeOrder}} / {{OrderDetails.totalOrder}}</span>
+      </div>
+
+      <!-- svg -->
+      <svg style="visibility: hidden; position: absolute;" width="0" height="0" xmlns="http://www.w3.org/2000/svg"
+          version="1.1">
+          <defs>
+              <filter id="round">
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
+                  <feColorMatrix in="blur" mode="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 19 -9"
+                      result="goo" />
+                  <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+              </filter>
+          </defs>
+      </svg>
+  </div>
+</div>
 <div class="parentDiv">
   <div class="datatable">
     @if(rows && rows.length > 0 && loding){
