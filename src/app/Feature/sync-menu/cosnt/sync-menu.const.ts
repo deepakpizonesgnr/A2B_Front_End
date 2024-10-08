@@ -5,6 +5,7 @@ export class syncMenuConstant {
     confirmation = 'For Confirmation'
     syncDataMessage = 'Are you sure , you want to sync data'
     getMenuListMessage = 'Are you sure , you want to see menu Data'
+    fechingError = 'Error fetching data:'
     columnData = [
         { prop: 'Sr No.', name: 'Sr No.' , sortable : false },
         { prop: 'Resturant Name', name: 'Resturant Name', sortable : false },

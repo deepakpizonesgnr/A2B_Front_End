@@ -32,7 +32,7 @@ export class SyncMenuService  {
 
     syncData(restroId?:any){
         const body = {id : restroId}
-        return this.http.post<any>(this.apiUrl + '/api/syncData' , body)
+        return this.http.post<any>(this.apiUrl + '/api/syncMenuForParticularOutlets' , body)
     }
 
   }

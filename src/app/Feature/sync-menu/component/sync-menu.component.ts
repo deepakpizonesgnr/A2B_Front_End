@@ -26,8 +26,10 @@ export class SyncMenuComponent {
     // this.logger.info('Starts')
     this.columns = this.constant.columnData
     this.page.pageNumber = 0;
-    this.page.size = 5;
+    this.page.size = 9;
     this.logger.info('Start Sync menu')
+    this.pagedRows = []
+    this.rows = []
   }
   purpose: string | undefined;
   loding : boolean = false;
@@ -39,13 +41,17 @@ export class SyncMenuComponent {
   loadingIndicator = true;
   reorderable = true;
   listOfMenus : SingleMenuRow[] = []
-  showModel : boolean = false;
   title: string = '';
   context: string = '';
   currentRowdata : any;
   syncMessage:string = ''
   private unsubscribe$ = new Subject<void>();
+  lodinMenuModel : boolean = false;
+
   ngOnInit(){
+    this.loadingIndicator = true;
+    this.loding = false;
+    this.listOfMenus = []
     this.setPage()
   }
 
@@ -66,20 +72,19 @@ export class SyncMenuComponent {
 
   // Below function is Use for get and set Records
   setPage(){
-    this.loadingIndicator = true; 
     this.service.getData().pipe(takeUntil(this.unsubscribe$)).subscribe({
       next: (response : any) => {
         this.rows = response; 
         this.page.totalElements = this.rows.length;
-        this.setPagination({ offset: 0 });
-        this.loding = true;
       },
       error: (error : any) => {
-        console.error('Error fetching data:', error);
+        console.error(this.constant.fechingError, error);
       },
       complete: () => {
         console.log(this.constant.successfulDataFetched);
         this.loadingIndicator = false; 
+        this.loding = true;
+        this.setPagination({ offset: 0 });
       }
     });
   }
@@ -88,26 +93,26 @@ export class SyncMenuComponent {
   openConfirmationPopup(row:any, title:string , context:string , purpose: string){
    if(row){
     this.currentRowdata = row;
-    this.showModel = true
     this.title = title ? title : ''
     this.context = context ? context : ''
     this.purpose = purpose;
    }
   }
 
-  getMenuList(){
+  getMenuList(currentRow?:menuRows){
     let json = {};
-    if(this.currentRowdata){
-      json = {'ShopCode' : this.currentRowdata.ShopCode , 'Region' : this.currentRowdata.Region}
+    this.lodinMenuModel = false;
+    if(this.listOfMenus.length == 0 && currentRow){
+      json = {'ShopCode' : currentRow.ShopCode , 'Region' : currentRow.Region}
       this.service.getMenu(json).subscribe({
         next: (response : any) => {
           this.listOfMenus = response; 
-          this.loding = true;
         },
         error: (error : any) => {
-          console.error('Error fetching data:', error);
+          console.error(this.constant.fechingError, error);
         },
         complete: () => {
+          this.lodinMenuModel = true;
           console.log(this.constant.successfulDataFetched);
         }
       });
@@ -115,17 +120,15 @@ export class SyncMenuComponent {
   }
 
   // when click on sync data it will syncing data
-
   syncingData(){
     if(this.currentRowdata){
-
       this.service.syncData(this.currentRowdata.ShopCode).subscribe({
         next: (response : any) => {
           this.syncMessage = response; 
           this.loding = true;
         },
         error: (error : any) => {
-          console.error('Error fetching data:', error);
+          console.error(this.constant.fechingError, error);
         },
         complete: () => {
           console.log(this.constant.successfulDataFetched);
@@ -134,15 +137,18 @@ export class SyncMenuComponent {
     }
   }
 
-
   clickToSure(){
     switch (this.purpose) {
       case this.constant.GetMenu:
-        this.getMenuList()
+        this.getMenuList() 
         break;
       case this.constant.SyncData:
         this.syncingData()
         break;
     }
+  }
+
+  cancleMenuModel(){
+    this.listOfMenus = []
   }
 }

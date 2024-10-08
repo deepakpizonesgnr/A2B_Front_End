@@ -2,6 +2,13 @@
 @import "./scss/variables";
 @import "./scss/reset";
 @import "./scss/module";
+
+@import "./scss/variable";
+@import "./scss/layout";
+@import "./scss/component";
+@import "./scss/nav";
+@import "./scss/table";
+
 @import url(../node_modules/@swimlane/ngx-datatable/themes/material.scss);
 @import url(../node_modules/@swimlane/ngx-datatable/themes/bootstrap.scss);
 @import url(../node_modules/@swimlane/ngx-datatable/themes/dark.scss);

@@ -1,0 +1,168 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  min-width: 1000px;
+}
+.table {
+  border: 1px solid #e9f2ff;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+thead {
+  background-color: #e3eeff;
+  border: 0;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+tbody {
+  border: 0;
+}
+
+tr {
+  border: 0;
+}
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 0px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+th {
+  font-size: 18px;
+  color: #000;
+  background-color: #e3eeff;
+  font-weight: 500;
+}
+
+td {
+  font-size: 18px;
+  font-weight: 500;
+  color: #555;
+}
+
+.status {
+  //   padding: 4px 8px;
+  //   border-radius: 4px;
+  font-weight: 500;
+  //   color: white;
+}
+
+.status.pending {
+  color: #f39c12;
+}
+
+.status.syncing {
+  color: #3498db;
+}
+
+.status.synced {
+  color: #2ecc71;
+}
+
+.status.failed {
+  color: #e74c3c;
+}
+
+.status.updated {
+  color: #8e44ad;
+}
+
+button {
+  padding: 10px 27px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.view-btn {
+  background-color: #0b5ed7;
+  color: white;
+}
+
+.sync-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+tr > td:nth-child(2),
+tr > td:nth-child(4) {
+  background-color: #f8fbff;
+}
+tr > td:nth-child(3) {
+  background-color: #ecf4ff;
+}
+
+.pagination-pages span.active {
+  color: #0b5ed7;
+}
+.pagination-pages span {
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.total-records-count {
+  border: 1px solid #e9f2ff;
+  background-color: #fbfdff;
+  border-radius: 7px;
+  padding: 15px 12px;
+}
+
+@media (max-width: 1400px) {
+  th,
+  td {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  th {
+    font-size: 16px;
+  }
+
+  td {
+    font-size: 16px;
+  }
+  button {
+    padding: 8px 20px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+}
+
+.table-scroll {
+  overflow: auto;
+  max-height: calc(100vh - 220px);
+}
+
+@media (max-width: 975px) {
+  th,
+  td {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  th {
+    font-size: 14px;
+  }
+
+  td {
+    font-size: 14px;
+  }
+  button {
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+}

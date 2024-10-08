@@ -1,5 +1,3 @@
-<p>sync-menu works!</p>
-{{loding}}--checkLoding
 <div class="datatable">
     @if(!loding){
         <div class="loading-skeleton">
@@ -37,12 +35,28 @@
                   </div>
                   }
                 </div>
+                <div class="d-flex skeleton-view">
+                  @for (skelton of [].constructor(4); track skelton) {
+                  <div class="form-group" style="min-width:150px">
+                    <input type="email" class="form-control" id="exampleFormControlInput1">
+                    <input type="email" class="form-control" id="exampleFormControlInput1">
+                  </div>
+                  }
+                </div>
+                <div class="d-flex skeleton-view">
+                  @for (skelton of [].constructor(4); track skelton) {
+                  <div class="form-group" style="min-width:150px">
+                    <input type="email" class="form-control" id="exampleFormControlInput1">
+                    <input type="email" class="form-control" id="exampleFormControlInput1">
+                  </div>
+                  }
+                </div>
               </div>
             </form>
           </div>
     }
     @if(rows && rows.length > 0 && loding && !loadingIndicator){
-      <div>
+      <div style="margin-top:45px;margin-left: 40px;margin-right: 40px;">
           <ngx-datatable
           class="material"
           [rows]="pagedRows"
@@ -50,7 +64,7 @@
           [columns]="columns"
           [columnMode]="ColumnMode.standard"
           [headerHeight]="40"
-          [footerHeight]="30"
+          [footerHeight]="55"
           rowHeight="auto"
           [reorderable]="reorderable"
           [scrollbarV]="true"
@@ -73,7 +87,7 @@
             </ng-template>
           </ngx-datatable-column>
   
-          <ngx-datatable-column name="Location">
+          <ngx-datatable-column name="Location" [cellClass]="'custom-background'">
             <ng-template let-row="row" ngx-datatable-cell-template>
               {{ row['Add2'] }}
             </ng-template>
@@ -93,26 +107,144 @@
   
           <ngx-datatable-column name="Menu" >
             <ng-template let-row="row" ngx-datatable-cell-template>
-              <!-- <button (click)="getMenu(row)" data-bs-toggle="modal" data-bs-target="#exampleModal">View</button> -->
-              <button (click)="openConfirmationPopup(row,constant.confirmation,constant.getMenuListMessage,constant.GetMenu)" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                View
-              </button>
+                <button (click)="getMenuList(row)"  type="button" style="background-color: #0b5ed7;color: white;" data-bs-toggle="modal" data-bs-target="#menu-modal">
+                  View
+                </button>
             </ng-template>
           </ngx-datatable-column>
           <ngx-datatable-column name="Sync">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                <button (click)="openConfirmationPopup(row,constant.confirmation,constant.syncDataMessage,constant.SyncData)" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button (click)="openConfirmationPopup(row,constant.confirmation,constant.syncDataMessage,constant.SyncData)" type="button" style="background-color: green;color: white;" data-bs-toggle="modal" data-bs-target="#globalModel">
                     Sync
                   </button>
             </ng-template>
           </ngx-datatable-column>
           </ngx-datatable>
       </div>
-  }
+    }
 
+    <!-- @if(showMenuModel){ -->
+      <div class=" modal fade" id="menu-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h1 class="modal-title" id="staticBackdropLabel">Resturent Menu</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cancleMenuModel()"></button>
+              </div>
+              <div class="modal-body">
+                  <div class="row row-gap-4">
+                    @if(!lodinMenuModel){
+                      <div class="loading-skeleton">
+                          <form>
+                            <div class="skeleton-container">
+                              <div class="d-flex skeleton-view">
+                                @for (skelton of [].constructor(4); track skelton) {
+                                <div class="form-group" style="min-width:150px">
+                                  <input type="email" class="form-control" id="exampleFormControlInput1">
+                                  <input type="email" class="form-control" id="exampleFormControlInput1">
+                                </div>
+                                }
+                              </div>
+                              <div class="d-flex skeleton-view">
+                                @for (skelton of [].constructor(4); track skelton) {
+                                <div class="form-group" style="min-width:150px">
+                                  <input type="email" class="form-control" id="exampleFormControlInput1">
+                                  <input type="email" class="form-control" id="exampleFormControlInput1">
+                                </div>
+                                }
+                              </div>
+                              <div class="d-flex skeleton-view">
+                                @for (skelton of [].constructor(4); track skelton) {
+                                <div class="form-group" style="min-width:150px">
+                                  <input type="email" class="form-control" id="exampleFormControlInput1">
+                                  <input type="email" class="form-control" id="exampleFormControlInput1">
+                                </div>
+                                }
+                              </div>
+                              <div class="d-flex skeleton-view">
+                                @for (skelton of [].constructor(4); track skelton) {
+                                <div class="form-group" style="min-width:150px">
+                                  <input type="email" class="form-control" id="exampleFormControlInput1">
+                                  <input type="email" class="form-control" id="exampleFormControlInput1">
+                                </div>
+                                }
+                              </div>
+                              <div class="d-flex skeleton-view">
+                                @for (skelton of [].constructor(4); track skelton) {
+                                <div class="form-group" style="min-width:150px">
+                                  <input type="email" class="form-control" id="exampleFormControlInput1">
+                                  <input type="email" class="form-control" id="exampleFormControlInput1">
+                                </div>
+                                }
+                              </div>
+                              <div class="d-flex skeleton-view">
+                                @for (skelton of [].constructor(4); track skelton) {
+                                <div class="form-group" style="min-width:150px">
+                                  <input type="email" class="form-control" id="exampleFormControlInput1">
+                                  <input type="email" class="form-control" id="exampleFormControlInput1">
+                                </div>
+                                }
+                              </div>
+                              <div class="d-flex skeleton-view">
+                                @for (skelton of [].constructor(4); track skelton) {
+                                <div class="form-group" style="min-width:150px">
+                                  <input type="email" class="form-control" id="exampleFormControlInput1">
+                                  <input type="email" class="form-control" id="exampleFormControlInput1">
+                                </div>
+                                }
+                              </div>
+                              <div class="d-flex skeleton-view">
+                                @for (skelton of [].constructor(4); track skelton) {
+                                <div class="form-group" style="min-width:150px">
+                                  <input type="email" class="form-control" id="exampleFormControlInput1">
+                                  <input type="email" class="form-control" id="exampleFormControlInput1">
+                                </div>
+                                }
+                              </div>
+                              <div class="d-flex skeleton-view">
+                                @for (skelton of [].constructor(4); track skelton) {
+                                <div class="form-group" style="min-width:150px">
+                                  <input type="email" class="form-control" id="exampleFormControlInput1">
+                                  <input type="email" class="form-control" id="exampleFormControlInput1">
+                                </div>
+                                }
+                              </div>
+                            </div>
+                          </form>
+                      </div>
+                    }
+                    @else {
+                      @for(singleMenu of listOfMenus; track singleMenu){
+                        <div class="col-12 col-md-6 col-xxl-4">
+                            <div class="menu-item-card">
+                                <img src="./assets/images/svg/menu-item-img.png" alt="menu-item-img">
+                                <div class="menu-item-detail">
+                                    <p class="item-name">{{singleMenu?.Iname}}/p>
+                                    <p class="item-category">{{singleMenu?.CategoryName}}</p>
+                                    <p class="item-quantity">{{singleMenu?.OptionGroupName}}/p>
+                                    <p class="item-price">${{singleMenu?.RateWithoutTax}}</p>
+                                </div>
+                            </div>
+                        </div>
+                      }
+                    }
+                  </div>
+              </div>
+              <div class="modal-footer">
+              </div>
+          </div>
+      </div>
+  </div>
+    <!-- } -->
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+  <script src="./assets/js/main.js"></script>
   <div>
     <app-modle [title]="title" [context]="context" (clickToSure)="clickToSure()"></app-modle>
-  </div>
-  
   </div>
 
