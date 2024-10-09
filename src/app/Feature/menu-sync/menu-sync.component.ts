@@ -1,14 +1,13 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
 import { FormsModule } from '@angular/forms';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { CommonModule } from '@angular/common';
 import { AppLoggerModule } from '../../Core/logger.module';
 
 @Component({
   selector: 'app-menu-sync',
   standalone: true,
-  imports: [AppLoggerModule, FormsModule, NgxDatatableModule, CommonModule],
+  imports: [AppLoggerModule, FormsModule, CommonModule],
   templateUrl: './menu-sync.component.html',
   styleUrl: './menu-sync.component.scss'
 })

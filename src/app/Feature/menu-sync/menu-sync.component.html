@@ -10,48 +10,6 @@
    
   <!-- Data Table -->
    
-  <ngx-datatable class="bootstrap" [rows]="rows" [columns]="columns" [headerHeight]="50" [footerHeight]="50"
-    [rowHeight]="'auto'" [limit]="pageSize" [count]="rows.length" [offset]="currentPage" (page)="onPageChange($event)">
-   
-    <!-- Custom template for View Menu column with button -->
-    <ngx-datatable-column name="Sr No.">
-      <ng-template let-row="row" ngx-datatable-cell-template>
-        {{row.sr}}
-      </ng-template>
-    </ngx-datatable-column>
-   
-    <!-- Custom template for Restaurant Name column with button -->
-    <ngx-datatable-column name="Restaurant Name">
-      <ng-template let-row="row" ngx-datatable-cell-template>
-        {{row.restaurantName}}
-      </ng-template>
-    </ngx-datatable-column>
-   
-    <!-- Custom template for Status column with button -->
-    <ngx-datatable-column name="Status">
-      <ng-template let-row="row" ngx-datatable-cell-template>
-        <span>
-          <span>{{ row.status }}</span>
-        </span>
-      </ng-template>
-    </ngx-datatable-column>
-   
-    <!-- Custom template for View Menu column with button -->
-    <ngx-datatable-column name="View Menu">
-      <ng-template let-row="row" ngx-datatable-cell-template>
-        <button (click)="onViewMenuClicked()" class="btn btn-primary">View Menu</button>
-      </ng-template>
-    </ngx-datatable-column>
-   
-    <!-- Custom template for Sync column -->
-    <ngx-datatable-column name="Sync">
-      <ng-template let-row="row" ngx-datatable-cell-template>
-        <i (click)="onSyncClicked()" style="font-size: 25px;" class="bi bi-arrow-repeat"></i>
-      </ng-template>
-    </ngx-datatable-column>
-   
-  </ngx-datatable>
-   
   <!-- popup for view menu and sync menu -->
   <div class="modal" [ngClass]="{ 'is-active': modalVisible }">
     <div class="modal-background" (click)="close()"></div>
