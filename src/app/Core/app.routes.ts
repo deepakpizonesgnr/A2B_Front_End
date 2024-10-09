@@ -4,13 +4,15 @@ import { LoginComponent } from '../Feature/login/component/login.component';
 import { NotFoundComponent } from './404-page/not-found/not-found.component';
 import { AuthGuard } from './guards/auth.guard';
 import { MenuSyncComponent } from '../Feature/menu-sync/menu-sync.component';
+import { ForgotPasswordComponent } from '../Feature/login/forgot-password/forgot-password.component';
 
 
 export const routes: Routes = [
   // Add other loaded modules here
 
   { path: 'login', component: LoginComponent }, // Default route that redirects to login
-  { path: 'sync', component: MenuSyncComponent }, // Default route that redirects to login
+  { path: 'sync', component: MenuSyncComponent }, // route to sync
+  { path: 'forgot-password', component: ForgotPasswordComponent }, // route to sync
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // Default route that redirects to login
   {
     path: 'view',

@@ -1,36 +1,27 @@
 import { Component } from '@angular/core';
-import { SaveButtonComponent } from "../../../Shared/UI-Elements/save-button/save-button/save-button.component";
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import globalInterceptor from '../../../Core/interceptors/global.interceptor';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../../Core/services/auth.service';
 import { loginConst } from '../const/login-const';
 import { Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { SaveButtonComponent } from '../../../Shared/UI-Elements/save-button/save-button/save-button.component';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-forgot-password',
   standalone: true,
-  imports: [HttpClientModule, CommonModule, ReactiveFormsModule, FormsModule, SaveButtonComponent],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
-  providers: [
-    AuthService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: globalInterceptor,
-      multi: true, // This allows multiple interceptors
-    },
-  ]
+  imports: [HttpClientModule, CommonModule, FormsModule, SaveButtonComponent],
+  templateUrl: './forgot-password.component.html',
+  styleUrl: './forgot-password.component.scss'
 })
-export class LoginComponent {
+export class ForgotPasswordComponent {
 
   // constructor(private readonly loginServie:LoginService,private readonly http:HttpClient){}
   userData: any = {
     username: '',
     password: '',
   }
-  loginConst: any = loginConst;
+  loginConstants: any = loginConst;
   usernameError: string | null = null;  // Error message for username
   passwordError: string | null = null;  // Error message for password
   errorMessage: string | null = null;    // General error message for login
@@ -59,7 +50,7 @@ export class LoginComponent {
           if (typeof localStorage !== 'undefined') {
             localStorage.setItem('Token', this.Auth.token)
           }
-          this.route.navigateByUrl('view/dashboard')
+          this.route.navigateByUrl('login')
         },
         error: (error) => {
           if (error['customMessage'] == "Invalid credentials") {
@@ -76,21 +67,24 @@ export class LoginComponent {
 
   // Validation logic
   private isFormValid(): boolean {
-    const { username, password } = this.userData;
-    if (!username?.trim() && !password?.trim()) {
-      this.errorMessage = this.loginConst.invalidUserAndPass;
-      return false;
-    }
+    const { username } = this.userData;
 
     if (!username?.trim()) {
-      this.usernameError = this.loginConst.invalidUser;
+      this.usernameError = this.loginConstants.invalidUser;
       return false;
     }
 
-    if (!password?.trim()) {
-      this.passwordError = this.loginConst.invalidPass;
-      return false;
+    if (!(!username?.trim())) {
+      const phonePattern = /^[0-9]{10}$/;
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      const phoneValid = phonePattern.test(username);
+      const emailValid = emailPattern.test(username);
+      if (!(phoneValid || emailValid)) {
+        this.usernameError = this.loginConstants.invalidPhone;
+      }
+      return phoneValid || emailValid;
     }
+
     return true;
   }
 
@@ -101,7 +95,4 @@ export class LoginComponent {
     this.errorMessage = null;
   }
 
-  goToForgot(){
-    this.route.navigateByUrl('forgot-password')
-  }
 }
