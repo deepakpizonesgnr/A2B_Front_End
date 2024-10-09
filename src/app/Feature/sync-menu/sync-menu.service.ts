@@ -30,8 +30,8 @@ export class SyncMenuService  {
         return this.http.post<any>(this.apiUrl + '/api/getMenuForParticularOutlets', body) 
     }
 
-    syncData(restroId?:any){
-        const body = {id : restroId}
+    syncData(ShopCode?:any,Region?:string){
+        const body = {ShopCode : ShopCode , Region : Region}
         return this.http.post<any>(this.apiUrl + '/api/syncMenuForParticularOutlets' , body)
     }
 

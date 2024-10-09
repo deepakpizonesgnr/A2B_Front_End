@@ -1,62 +1,59 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AppLoggerModule } from '../../../Core/logger.module';
 import { NGXLogger } from 'ngx-logger';
-import { ColumnMode, NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { Person , DatesInformation , Page , OrderDetails } from '../interrface/dashboard-interface';
 import { dashboardConstant } from '../const/dashboard-const';
 import { dashboardService } from '../dashboard.service';
 import { SaveButtonComponent } from '../../../Shared/UI-Elements/save-button/save-button/save-button.component';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [AppLoggerModule,NgxDatatableModule,SaveButtonComponent],
+  imports: [AppLoggerModule,SaveButtonComponent,MatTableModule, MatPaginatorModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   providers : [dashboardService,dashboardConstant]
 })
 
 export class DashboardComponent {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   loding = false;
   rows: Person[] = [];
   pagedRows: Person[] = [];
-  loadingIndicator = true;
   reorderable = true;
   page = new Page();
   datesArray : DatesInformation[] = []
   OrderDetails  = new OrderDetails()
   columns : any;
   showDropDown:boolean = false;
-
+  dataSource = new MatTableDataSource<Person>(this.rows);
   constructor(private logger : NGXLogger,private service : dashboardService , private constant : dashboardConstant){
     this.logger.info('started')
     this.page.pageNumber = 0;
     this.page.size = 5;
     this.columns = this.constant.columnData
   }
-
-  ColumnMode = ColumnMode;
   ngOnInit() {
     this.getOrderDetails()
     this.getCalenderData();
     this.setPage();
+    this.dataSource.paginator = this.paginator;
   }
 
   // Below function is Use for get and set Records
   setPage(){
-    this.loadingIndicator = true;
     this.service.getData().subscribe({
       next: (response : any) => {
         this.rows = response; 
-        this.page.totalElements = this.rows.length;
-        this.loding = true;
-        this.setPagination({ offset: 0 });
       },
       error: (error : any) => {
         console.error('Error fetching data:', error);
       },
       complete: () => {
-        this.loadingIndicator = false;
+        this.loding = true;
         this.logger.info(this.constant.successfulDataFetched);
       }
     });
@@ -64,7 +61,6 @@ export class DashboardComponent {
 
   // Below function is Use for get and set Calander Data
   getCalenderData(){
-    this.loadingIndicator = true
     this.service.getCalenderData().subscribe({
       next: (response : any) => {
         this.datesArray = response; 
@@ -73,7 +69,6 @@ export class DashboardComponent {
         console.error('Error fetching in calender data:', error);
       },
       complete: () => {
-        this.loadingIndicator = false;
         console.log(this.constant.successfulDataFetched);
       }
     });
@@ -81,7 +76,6 @@ export class DashboardComponent {
 
   // Below function is Use for get and set intial order details
   getOrderDetails(){
-    this.loadingIndicator = true;
     this.service.getOrdersDetail().subscribe({
       next: (response : any) => {
         this.OrderDetails = response; 
@@ -90,7 +84,6 @@ export class DashboardComponent {
         console.error('Error fetching in OrderDetail data:', error);
       },
       complete: () => {
-        this.loadingIndicator = false;
         this.logger.info(this.constant.successfulDataFetched);
       }
     });

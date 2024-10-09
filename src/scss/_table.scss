@@ -10,8 +10,8 @@ table {
   overflow: hidden;
 }
 
-thead {
-  background-color: #e3eeff;
+.mat-mdc-table thead  {
+  background-color: #e3eeff !important;
   border: 0;
   position: sticky;
   top: 0;
