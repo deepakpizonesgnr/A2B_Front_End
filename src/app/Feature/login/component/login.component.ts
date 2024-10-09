@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SaveButtonComponent } from "../../../Shared/UI-Elements/save-button/save-button/save-button.component";
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import globalInterceptor from '../../../Core/interceptors/global.interceptor';
 import { CommonModule } from '@angular/common';
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [HttpClientModule, CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [HttpClientModule, CommonModule, ReactiveFormsModule, FormsModule, SaveButtonComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   providers: [

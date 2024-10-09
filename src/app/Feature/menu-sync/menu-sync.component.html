@@ -1,0 +1,78 @@
+<!-- header.component.html -->
+<header class="header">
+    <div class="logo">A2B</div>
+    <div class="search-container">
+      <input type="text" [(ngModel)]="searchQuery" placeholder="Search..." (keyup.enter)="onSearch($event)"
+        class="search-input" />
+      <button (click)="onSearch($event)" class="search-button">Search</button>
+    </div>
+  </header>
+   
+  <!-- Data Table -->
+   
+  <ngx-datatable class="bootstrap" [rows]="rows" [columns]="columns" [headerHeight]="50" [footerHeight]="50"
+    [rowHeight]="'auto'" [limit]="pageSize" [count]="rows.length" [offset]="currentPage" (page)="onPageChange($event)">
+   
+    <!-- Custom template for View Menu column with button -->
+    <ngx-datatable-column name="Sr No.">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{row.sr}}
+      </ng-template>
+    </ngx-datatable-column>
+   
+    <!-- Custom template for Restaurant Name column with button -->
+    <ngx-datatable-column name="Restaurant Name">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{row.restaurantName}}
+      </ng-template>
+    </ngx-datatable-column>
+   
+    <!-- Custom template for Status column with button -->
+    <ngx-datatable-column name="Status">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <span>
+          <span>{{ row.status }}</span>
+        </span>
+      </ng-template>
+    </ngx-datatable-column>
+   
+    <!-- Custom template for View Menu column with button -->
+    <ngx-datatable-column name="View Menu">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <button (click)="onViewMenuClicked()" class="btn btn-primary">View Menu</button>
+      </ng-template>
+    </ngx-datatable-column>
+   
+    <!-- Custom template for Sync column -->
+    <ngx-datatable-column name="Sync">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <i (click)="onSyncClicked()" style="font-size: 25px;" class="bi bi-arrow-repeat"></i>
+      </ng-template>
+    </ngx-datatable-column>
+   
+  </ngx-datatable>
+   
+  <!-- popup for view menu and sync menu -->
+  <div class="modal" [ngClass]="{ 'is-active': modalVisible }">
+    <div class="modal-background" (click)="close()"></div>
+    <div class="modal-content">
+      <div class="box">
+        <div *ngFor="let category of getMenuCategories(); trackBy: trackByCategory">
+          <h2 style="color:blue;background-color:darkturquoise">{{ category.title }}</h2>
+          <div *ngFor="let food of category.items; trackBy: trackByFood">
+            <span style="display:flex; align-items: center;">
+              <span *ngIf="food.syncD">
+                <i style="font-size: 18px;color:green" class="bi bi-check-circle"></i>
+              </span>
+              <span *ngIf="!food.syncD">
+                <i style="font-size: 18px;color: red;" class="bi bi-exclamation-circle"></i>
+              </span>
+              <h5>{{ food.name }}</h5>
+            </span>
+          </div>
+        </div>
+        <p><strong>Price: 200</strong></p>
+        <button (click)="close()" class="button">Close</button>
+      </div>
+    </div>
+  </div>

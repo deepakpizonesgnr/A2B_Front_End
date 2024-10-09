@@ -1,78 +1,106 @@
-<!-- header.component.html -->
-<header class="header">
-  <div class="logo">A2B</div>
-  <div class="search-container">
-    <input type="text" [(ngModel)]="searchQuery" placeholder="Search..." (keyup.enter)="onSearch($event)"
-      class="search-input" />
-    <button (click)="onSearch($event)" class="search-button">Search</button>
+<div class="border-top" style="margin-bottom: 1rem !important;">
+</div>
+@if(OrderDetails){
+  <div class="OrdersInformation">
+       <div class="pending">Pending Orders : {{OrderDetails.pandingOrder}}</div>
+       <div class="pending">Cancle Orders : {{OrderDetails.cancleOrder}} </div>
+       <div class="pending">Complete Orders : {{OrderDetails.completeOrder}} / {{OrderDetails.totalOrder}}</div>
   </div>
-</header>
-
-<!-- Data Table -->
-
-<ngx-datatable class="bootstrap" [rows]="rows" [columns]="columns" [headerHeight]="50" [footerHeight]="50"
-  [rowHeight]="'auto'" [limit]="pageSize" [count]="rows.length" [offset]="currentPage" (page)="onPageChange($event)">
-
-  <!-- Custom template for View Menu column with button -->
-  <ngx-datatable-column name="Sr No.">
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      {{row.sr}}
-    </ng-template>
-  </ngx-datatable-column>
-
-  <!-- Custom template for Restaurant Name column with button -->
-  <ngx-datatable-column name="Restaurant Name">
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      {{row.restaurantName}}
-    </ng-template>
-  </ngx-datatable-column>
-
-  <!-- Custom template for Status column with button -->
-  <ngx-datatable-column name="Status">
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      <span>
-        <span>{{ row.status }}</span>
-      </span>
-    </ng-template>
-  </ngx-datatable-column>
-
-  <!-- Custom template for View Menu column with button -->
-  <ngx-datatable-column name="View Menu">
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      <button (click)="onViewMenuClicked()" class="btn btn-primary">View Menu</button>
-    </ng-template>
-  </ngx-datatable-column>
-
-  <!-- Custom template for Sync column -->
-  <ngx-datatable-column name="Sync">
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      <i (click)="onSyncClicked()" style="font-size: 25px;" class="bi bi-arrow-repeat"></i>
-    </ng-template>
-  </ngx-datatable-column>
-
-</ngx-datatable>
-
-<!-- popup for view menu and sync menu -->
-<div class="modal" [ngClass]="{ 'is-active': modalVisible }">
-  <div class="modal-background" (click)="close()"></div>
-  <div class="modal-content">
-    <div class="box">
-      <div *ngFor="let category of getMenuCategories(); trackBy: trackByCategory">
-        <h2 style="color:blue;background-color:darkturquoise">{{ category.title }}</h2>
-        <div *ngFor="let food of category.items; trackBy: trackByFood">
-          <span style="display:flex; align-items: center;">
-            <span *ngIf="food.syncD">
-              <i style="font-size: 18px;color:green" class="bi bi-check-circle"></i>
-            </span>
-            <span *ngIf="!food.syncD">
-              <i style="font-size: 18px;color: red;" class="bi bi-exclamation-circle"></i>
-            </span>
-            <h5>{{ food.name }}</h5>
-          </span>
-        </div>
+}
+<div class="parentDiv">
+  <div class="datatable">
+    @if(rows && rows.length > 0 && loding){
+      <div>
+          <h3>Data</h3>
+          <ngx-datatable
+          class="material"
+          [rows]="pagedRows"
+          [loadingIndicator]="loadingIndicator"
+          [columns]="columns"
+          [columnMode]="ColumnMode.standard"
+          [headerHeight]="40"
+          [footerHeight]="30"
+          rowHeight="auto"
+          [reorderable]="reorderable"
+          [scrollbarV]="true"
+          [virtualization]="false"
+          [externalPaging]="true"
+          [count]="page.totalElements"
+          [offset]="page.pageNumber"
+          [limit]="page.size"
+          (page)="setPagination($event)"
+          >
+          <ngx-datatable-column name="Order ID">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row['Order ID'] }}
+            </ng-template>
+          </ngx-datatable-column>
+  
+          <ngx-datatable-column name="Date">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row['Date'] }}
+            </ng-template>
+          </ngx-datatable-column>
+  
+          <ngx-datatable-column name="Customer Name">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row['Customer Name'] }}
+            </ng-template>
+          </ngx-datatable-column>
+  
+          <ngx-datatable-column name="Description">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row['Description'] }}
+            </ng-template>
+          </ngx-datatable-column>
+  
+          <ngx-datatable-column name="Aggregator">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row['Aggregator'] }}
+            </ng-template>
+          </ngx-datatable-column>
+  
+          <ngx-datatable-column name="Location"  [cellClass]="'custom-background'">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row['Location'] }}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Amount">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row['Amount'] }}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Status Order">
+            <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+              <div class="statusAndMenu">
+                <div class="status {{row['Status Order']}}">
+                  {{row['Status Order']}}
+                </div>
+                <div class="Button">
+                  <button (click)="OpenDropDown(rowIndex)">...</button>
+                </div>
+              </div>
+              @if(row.showDropDown){
+                <div class="DropDown">
+                  <button>Accept Order</button>
+                  <button>Reject Order</button>
+                </div>
+              }
+              
+            </ng-template>
+          </ngx-datatable-column>
+          </ngx-datatable>
       </div>
-      <p><strong>Price: 200</strong></p>
-      <button (click)="close()" class="button">Close</button>
-    </div>
+  }
+  </div>
+  <div class="Calander">
+    <div class="heading"><h2>Here is Calander data</h2></div>
+    @for (date of datesArray; track date) {
+      <div class="datediv">
+        Day : {{date.Day}} , Date : {{date.Date}} , OrderCount : {{date.OrdersCount}}
+      </div>
+    }
   </div>
 </div>
+
+
