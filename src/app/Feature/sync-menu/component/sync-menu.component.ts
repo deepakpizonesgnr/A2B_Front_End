@@ -28,7 +28,6 @@ export class SyncMenuComponent {
     this.columns = this.constant.columnData
     this.logger.info('Start Sync menu')
   }
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
   purpose: string | undefined;
   loding : boolean = false;
   rows : menuRows[] = []
@@ -42,13 +41,23 @@ export class SyncMenuComponent {
   syncMessage:string = ''
   private unsubscribe$ = new Subject<void>();
   lodinMenuModel : boolean = false;
-  dataSource = new MatTableDataSource<menuRows>(this.rows);
+  dataSource = new MatTableDataSource<menuRows>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(){
     this.loding = false;
     this.listOfMenus = []
-    this.setPage()
-    this.dataSource.paginator = this.paginator;
+    this.setPage(); // Fetch data
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      if(this.paginator && this.dataSource){
+        this.dataSource.paginator = this.paginator;
+      }else{
+        this.logger.info('still its undefined')
+      }
+    }, 200);
   }
 
   ngOnDestroy() {
@@ -62,13 +71,16 @@ export class SyncMenuComponent {
     this.service.getData().pipe(takeUntil(this.unsubscribe$)).subscribe({
       next: (response : any) => {
         this.rows = response.data; 
+        this.dataSource = new MatTableDataSource(this.rows)
+        this.dataSource.paginator = this.paginator;
+        // this.dataSource.data = this.rows; 
+        this.loding = true;
       },
       error: (error : any) => {
         console.error(this.constant.fechingError, error);
       },
       complete: () => {
         console.log(this.constant.successfulDataFetched);
-        this.loding = true;
       }
     });
   }
