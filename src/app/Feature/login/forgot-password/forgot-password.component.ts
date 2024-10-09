@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../Core/services/auth.service';
-import { loginConst } from '../const/login-const';
+import { loginConst, welcomeText } from '../const/login-const';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SaveButtonComponent } from '../../../Shared/UI-Elements/save-button/save-button/save-button.component';
+import { forgotPassword } from '../interface/login-interface';
 
 @Component({
   selector: 'app-forgot-password',
@@ -17,10 +18,9 @@ import { SaveButtonComponent } from '../../../Shared/UI-Elements/save-button/sav
 export class ForgotPasswordComponent {
 
   // constructor(private readonly loginServie:LoginService,private readonly http:HttpClient){}
-  userData: any = {
-    username: '',
-    password: '',
-  }
+
+  userData  = new forgotPassword();
+  welcomeText: any = welcomeText;
   loginConstants: any = loginConst;
   usernameError: string | null = null;  // Error message for username
   passwordError: string | null = null;  // Error message for password
@@ -36,8 +36,7 @@ export class ForgotPasswordComponent {
 
     if (this.isFormValid()) {
       let json: any = {
-        "username": this.userData.username,
-        "password": this.userData.password
+        "email": this.userData.email,
       }
       this.Auth.login(json).subscribe({
         next: (response) => {
@@ -67,18 +66,18 @@ export class ForgotPasswordComponent {
 
   // Validation logic
   private isFormValid(): boolean {
-    const { username } = this.userData;
+    const { email } = this.userData;
 
-    if (!username?.trim()) {
+    if (!email?.trim()) {
       this.usernameError = this.loginConstants.invalidUser;
       return false;
     }
 
-    if (!(!username?.trim())) {
+    if (!(!email?.trim())) {
       const phonePattern = /^[0-9]{10}$/;
       const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-      const phoneValid = phonePattern.test(username);
-      const emailValid = emailPattern.test(username);
+      const phoneValid = phonePattern.test(email);
+      const emailValid = emailPattern.test(email);
       if (!(phoneValid || emailValid)) {
         this.usernameError = this.loginConstants.invalidPhone;
       }

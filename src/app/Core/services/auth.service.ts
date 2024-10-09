@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
   constructor(private readonly http: HttpClient, private route: Router) { }
   token: any;
-  private loginDemo = 'http://localhost:3000/api/users/login'; // Sample API
+  private loginDemo = 'http://localhost:3000/api/login'; // Sample API
 
   login(json: string): Observable<any> {
     return this.http.post<any>(this.loginDemo, json);

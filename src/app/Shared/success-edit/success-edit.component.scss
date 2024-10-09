@@ -1,4 +1,4 @@
-@import "../../../../scss/variables";
+@import "../../../scss/variables";
 
 .login-section {
     height: 100vh;
@@ -22,7 +22,7 @@
     display: flex;
     align-items: center;
     padding: 0 12vw 0 26%;
-    background: url("../../../../assets/images/tile-yellow.png"), $theme;
+    background: url("../../../assets//images/tile-yellow.png"), $theme;
 
     background: {
         blend-mode: overlay, normal;
@@ -142,6 +142,7 @@
 .errorsShow {
     border: 1px solid red !important;
 }
+
 ::placeholder {
     color: #dee2e6;
     opacity: 1;

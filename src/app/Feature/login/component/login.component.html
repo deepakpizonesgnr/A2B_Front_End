@@ -9,17 +9,10 @@
                     <div class="heading">
                         <img src="../../../../assets/images/Logotheme.svg" alt="" class="logo box-logo mb-3">
 
-                        <div>Welcome to</div>
-                        <div class="theme">A2B Sweets</div>
+                        <div>{{welcomeText.welcomeTo}}</div>
+                        <div class="theme">{{welcomeText.theme}}</div>
                     </div>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime laborum dicta sequi placeat
-                        tempore
-                        quidem possimus. Fuga ipsam consequuntur sapiente tempora quos labore eligendi eius distinctio.
-                        Quidem soluta fuga magnam.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime
-                        laborum dicta sequi placeat
-                        tempore
-                        quidem possimus. Fuga ipsam consequuntur sapiente tempora quos labore eligendi eius distinctio.
-                        Quidem soluta fuga magnam.</p>
+                    <p>{{welcomeText.description}}</p>
                 </div>
             </div>
         </div>
@@ -35,17 +28,17 @@
                 <div class="form w-100">
                     <div class="mb-3">
                         <!-- email -->
-                        <label for="email">Email</label>
-                        <input required id="username" [(ngModel)]="userData.username" name="username" type="text"
-                            [ngClass]="(usernameError || errorMessage) && (userData.username == null || userData.username == '' ) ? 'errorsShow':''"
+                        <label for="email">Email / Phone No.</label>
+                        <input placeholder="Email" required id="email" [(ngModel)]="userData.email" name="email" type="text"
+                            [ngClass]="(usernameError || errorMessage) ? 'errorsShow':''"
                             class="form-control">
                         <div *ngIf="usernameError">Username is required.</div>
                     </div>
                     <div class="w-100">
                         <!-- password -->
                         <label for="password">password</label>
-                        <input required id="password" [(ngModel)]="userData.password" name="password"
-                            [ngClass]="(passwordError || errorMessage) && (userData.password == null || userData.password == '' ) ? 'errorsShow':''"
+                        <input placeholder="Password" required id="password" [(ngModel)]="userData.password" name="password"
+                            [ngClass]="(passwordError || errorMessage) ? 'errorsShow':''"
                             type="password" class="form-control">
                         <div *ngIf="passwordError">Password is required.</div>
                     </div>
@@ -53,11 +46,12 @@
                 <div *ngIf="errorMessage && !usernameError && !passwordError" class="error">
                     {{ errorMessage }}
                 </div>
-                <span style="display: flex;">
+                <span style="display: flex;width: 100%;">
                     <button class="btn btn-theme">Login</button>
+                    <a  (click)="goToForgot()">Forgot Password</a>
                 </span>
             </div>
         </form>
-        <button class="btn btn-theme" (click)="goToForgot()">Forgot Password</button>
+        <!-- <button class="btn btn-theme" (click)="goToChangePass()">Change Password</button> -->
     </div>
 </div>

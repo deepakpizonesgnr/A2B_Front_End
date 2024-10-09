@@ -340,3 +340,8 @@
 .errorsShow {
     border: 1px solid red !important;
 }
+
+::placeholder {
+    color: #dee2e6;
+    opacity: 1;
+}

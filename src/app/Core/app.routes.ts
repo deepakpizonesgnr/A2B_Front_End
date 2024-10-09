@@ -5,6 +5,7 @@ import { NotFoundComponent } from './404-page/not-found/not-found.component';
 import { AuthGuard } from './guards/auth.guard';
 import { MenuSyncComponent } from '../Feature/menu-sync/menu-sync.component';
 import { ForgotPasswordComponent } from '../Feature/login/forgot-password/forgot-password.component';
+import { ChangePasswordComponent } from '../Feature/login/change-password/change-password.component';
 
 
 export const routes: Routes = [
@@ -12,7 +13,8 @@ export const routes: Routes = [
 
   { path: 'login', component: LoginComponent }, // Default route that redirects to login
   { path: 'sync', component: MenuSyncComponent }, // route to sync
-  { path: 'forgot-password', component: ForgotPasswordComponent }, // route to sync
+  { path: 'forgot-password', component: ForgotPasswordComponent }, // route to forgot password
+  { path: 'change-password', component: ChangePasswordComponent }, // route to change password
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // Default route that redirects to login
   {
     path: 'view',
