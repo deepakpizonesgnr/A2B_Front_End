@@ -1,2 +1,46 @@
+<header class="">
+    <aside class="navbar navbar-expand-lg" id="nav">
+        <div class="w-100 d-flex container-fluid">
+            <div class="d-flex align-items-center gap-2 ms-2">
+                <div class="menu-icon d-flex align-items-center justify-content-center me-3" >
+                    <a data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
+                        <img src="../assets/images/svg/Menu-Icon.svg" alt="Menu-Icon">
+                    </a>
+                </div>
+                <img src="../assets/images/svg/Vector.svg" alt="Logo">
+                <p class="fs-24 fw-600 cl-white m-0">Dashbaord</p>
+            </div>
 
+            <div class="profile-notification d-flex align-items-center gap-4 me-4">
+                <div    class="notification-icon">
+                    <img src="../assets/images/svg/Notification-icon.svg" alt="Notification-icon">
+                </div>
+                <div class="profile-tab d-flex align-items-center gap-2">
+                    <div class="profile-img">
+                        <img src="../assets/images/svg/profile-img.svg" alt="profile-img">
+                    </div>
+                    <div class="profile-info">
+                        <p class="user-name cl-white fs-14 fw-400">Adhyan Vishnoi</p>
+                        <p class="user-role cl-white fs-12 fw-400 opacity-50">Admin</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+</header>
 <router-outlet></router-outlet>
+
+<!-- Side Car view  -->
+<div name="offCampus">
+    <div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="staticBackdropLabel">Offcanvas</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div><a href="/sync-menu" >Resturent Details</a></div>
+        <div><a href="/dashboard" >Dashbaord</a></div>
+        <div><a href="">LogOut</a></div>
+      </div>
+    </div>
+  </div>

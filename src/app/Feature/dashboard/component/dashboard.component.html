@@ -1,96 +1,85 @@
-<div class="border-top" style="margin-bottom: 1rem !important;">
-</div>
-@if(OrderDetails){
-  <div class="OrdersInformation">
-       <div class="pending">Pending Orders : {{OrderDetails.pandingOrder}}</div>
-       <div class="pending">Cancle Orders : {{OrderDetails.cancleOrder}} </div>
-       <div class="pending">Complete Orders : {{OrderDetails.completeOrder}} / {{OrderDetails.totalOrder}}</div>
+<div class="status-menu">
+
+  <div class="status-bar hold">
+      <span>Pending : {{OrderDetails.pandingOrder}}</span>
   </div>
-}
+  <div class="status-bar cancel">
+      <span>Canceled : {{OrderDetails.cancleOrder}}</span>
+  </div>
+  <div class="status-bar success">
+      <span>Completed : {{OrderDetails.completeOrder}} / {{OrderDetails.totalOrder}}</span>
+  </div>
+
+  <!-- svg -->
+  <svg style="visibility: hidden; position: absolute;" width="0" height="0" xmlns="http://www.w3.org/2000/svg"
+      version="1.1">
+      <defs>
+          <filter id="round">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
+              <feColorMatrix in="blur" mode="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 19 -9"
+                  result="goo" />
+              <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+          </filter>
+      </defs>
+  </svg>
+</div>
+
 <div class="parentDiv">
   <div class="datatable">
-    @if(rows && rows.length > 0 && loding){
-      <div>
-          <h3>Data</h3>
-          <ngx-datatable
-          class="material"
-          [rows]="pagedRows"
-          [loadingIndicator]="loadingIndicator"
-          [columns]="columns"
-          [columnMode]="ColumnMode.standard"
-          [headerHeight]="40"
-          [footerHeight]="30"
-          rowHeight="auto"
-          [reorderable]="reorderable"
-          [scrollbarV]="true"
-          [virtualization]="false"
-          [externalPaging]="true"
-          [count]="page.totalElements"
-          [offset]="page.pageNumber"
-          [limit]="page.size"
-          (page)="setPagination($event)"
-          >
-          <ngx-datatable-column name="Order ID">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-              {{ row['Order ID'] }}
-            </ng-template>
-          </ngx-datatable-column>
-  
-          <ngx-datatable-column name="Date">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-              {{ row['Date'] }}
-            </ng-template>
-          </ngx-datatable-column>
-  
-          <ngx-datatable-column name="Customer Name">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-              {{ row['Customer Name'] }}
-            </ng-template>
-          </ngx-datatable-column>
-  
-          <ngx-datatable-column name="Description">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-              {{ row['Description'] }}
-            </ng-template>
-          </ngx-datatable-column>
-  
-          <ngx-datatable-column name="Aggregator">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-              {{ row['Aggregator'] }}
-            </ng-template>
-          </ngx-datatable-column>
-  
-          <ngx-datatable-column name="Location"  [cellClass]="'custom-background'">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-              {{ row['Location'] }}
-            </ng-template>
-          </ngx-datatable-column>
-          <ngx-datatable-column name="Amount">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-              {{ row['Amount'] }}
-            </ng-template>
-          </ngx-datatable-column>
-          <ngx-datatable-column name="Status Order">
-            <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
-              <div class="statusAndMenu">
-                <div class="status {{row['Status Order']}}">
-                  {{row['Status Order']}}
-                </div>
-                <div class="Button">
-                  <button (click)="OpenDropDown(rowIndex)">...</button>
-                </div>
-              </div>
-              @if(row.showDropDown){
-                <div class="DropDown">
-                  <button>Accept Order</button>
-                  <button>Reject Order</button>
-                </div>
-              }
-              
-            </ng-template>
-          </ngx-datatable-column>
-          </ngx-datatable>
+  @if(loding){
+    <div class="container-fluid" style="height:750px">
+      <div class="px-4">
+        <div class="table">
+          <div class="table-scroll">
+            <table mat-table [dataSource]="rows" class="mat-elevation-z8">
+              <ng-container matColumnDef="Order ID">
+                <th mat-header-cell *matHeaderCellDef> Order ID </th>
+                <td mat-cell *matCellDef="let element"> {{element['Order ID']}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="Date">
+                <th mat-header-cell *matHeaderCellDef> Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.Date}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="Customer Name">
+                <th mat-header-cell *matHeaderCellDef> Customer Name </th>
+                <td mat-cell *matCellDef="let element"> {{element['Customer Name']}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="Description">
+                <th mat-header-cell *matHeaderCellDef> Description </th>
+                <td mat-cell *matCellDef="let element"> {{element.Description}} </td>
+              </ng-container>
+      
+              <ng-container matColumnDef="Aggregator">
+                <th mat-header-cell *matHeaderCellDef> Aggregator </th>
+                <td mat-cell *matCellDef="let element"> {{element.Aggregator}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Location">
+                <th mat-header-cell *matHeaderCellDef> Location </th>
+                <td mat-cell *matCellDef="let element"> {{element.Location}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Amount">
+                <th mat-header-cell *matHeaderCellDef> Amount </th>
+                <td mat-cell *matCellDef="let element"> {{element.Amount}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Status Order">
+                <th mat-header-cell *matHeaderCellDef> Status Order </th>
+                <td mat-cell *matCellDef="let element"> {{element['Status Order']}} </td>
+              </ng-container>
+            
+              <tr  mat-header-row *matHeaderRowDef="columns"></tr>
+              <tr  mat-row *matRowDef="let row; columns: columns;"></tr>
+            </table>
+          </div>
+          <mat-paginator [length]="rows.length"  [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
+        </div>
       </div>
+    </div>
   }
   </div>
   <div class="Calander">
