@@ -1,34 +1,33 @@
 <div class="status-menu">
 
   <div class="status-bar hold">
-      <span>Pending : {{OrderDetails.pandingOrder}}</span>
+    <span>Pending : {{OrderDetails.pandingOrder}}</span>
   </div>
   <div class="status-bar cancel">
-      <span>Canceled : {{OrderDetails.cancleOrder}}</span>
+    <span>Canceled : {{OrderDetails.cancleOrder}}</span>
   </div>
   <div class="status-bar success">
-      <span>Completed : {{OrderDetails.completeOrder}} / {{OrderDetails.totalOrder}}</span>
+    <span>Completed : {{OrderDetails.completeOrder}} / {{OrderDetails.totalOrder}}</span>
   </div>
 
   <!-- svg -->
   <svg style="visibility: hidden; position: absolute;" width="0" height="0" xmlns="http://www.w3.org/2000/svg"
-      version="1.1">
-      <defs>
-          <filter id="round">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
-              <feColorMatrix in="blur" mode="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 19 -9"
-                  result="goo" />
-              <feComposite in="SourceGraphic" in2="goo" operator="atop" />
-          </filter>
-      </defs>
+    version="1.1">
+    <defs>
+      <filter id="round">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
+        <feColorMatrix in="blur" mode="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+        <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+      </filter>
+    </defs>
   </svg>
 </div>
 
-<div class="parentDiv">
-  <div class="datatable">
-  @if(loding){
+<div class="parentDiv row px-3">
+  <div class="datatable col-12 col-lg-8">
+    @if(loding){
     <div class="container-fluid" style="height:750px">
-      <div class="px-4">
+      <div class="">
         <div class="table">
           <div class="table-scroll">
             <table mat-table [dataSource]="rows" class="mat-elevation-z8">
@@ -36,22 +35,22 @@
                 <th mat-header-cell *matHeaderCellDef> Order ID </th>
                 <td mat-cell *matCellDef="let element"> {{element['Order ID']}} </td>
               </ng-container>
-            
+
               <ng-container matColumnDef="Date">
                 <th mat-header-cell *matHeaderCellDef> Date </th>
                 <td mat-cell *matCellDef="let element"> {{element.Date}} </td>
               </ng-container>
-            
+
               <ng-container matColumnDef="Customer Name">
                 <th mat-header-cell *matHeaderCellDef> Customer Name </th>
                 <td mat-cell *matCellDef="let element"> {{element['Customer Name']}} </td>
               </ng-container>
-            
+
               <ng-container matColumnDef="Description">
                 <th mat-header-cell *matHeaderCellDef> Description </th>
                 <td mat-cell *matCellDef="let element"> {{element.Description}} </td>
               </ng-container>
-      
+
               <ng-container matColumnDef="Aggregator">
                 <th mat-header-cell *matHeaderCellDef> Aggregator </th>
                 <td mat-cell *matCellDef="let element"> {{element.Aggregator}} </td>
@@ -71,25 +70,27 @@
                 <th mat-header-cell *matHeaderCellDef> Status Order </th>
                 <td mat-cell *matCellDef="let element"> {{element['Status Order']}} </td>
               </ng-container>
-            
-              <tr  mat-header-row *matHeaderRowDef="columns"></tr>
-              <tr  mat-row *matRowDef="let row; columns: columns;"></tr>
+
+              <tr mat-header-row *matHeaderRowDef="columns"></tr>
+              <tr mat-row *matRowDef="let row; columns: columns;"></tr>
             </table>
           </div>
-          <mat-paginator [length]="rows.length"  [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
+          <mat-paginator [length]="rows.length" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+            aria-label="Select page of periodic elements"></mat-paginator>
         </div>
       </div>
     </div>
-  }
+    }
   </div>
-  <div class="Calander">
-    <div class="heading"><h2>Here is Calander data</h2></div>
+  <div class="Calander col-12 col-lg-4">
+    <div class="heading">
+      <h2>Here is Calander data</h2>
+    </div>
     @for (date of datesArray; track date) {
-      <div class="datediv">
-        Day : {{date.Day}} , Date : {{date.Date}} , OrderCount : {{date.OrdersCount}}
-      </div>
+    <div class="datediv">
+      <span>{{date.Day}} , {{date.Date}} </span>
+      <span> OrderCount : {{date.OrdersCount}}</span>
+    </div>
     }
   </div>
 </div>
-
-

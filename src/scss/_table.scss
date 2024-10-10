@@ -10,7 +10,7 @@ table {
   overflow: hidden;
 }
 
-.mat-mdc-table thead  {
+.mat-mdc-table thead {
   background-color: #e3eeff !important;
   border: 0;
   position: sticky;
@@ -34,14 +34,14 @@ td {
 }
 
 th {
-  font-size: 18px;
+  font-size: 16px;
   color: #000;
   background-color: #e3eeff;
   font-weight: 500;
 }
 
 td {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   color: #555;
 }
@@ -96,12 +96,16 @@ button:active {
   transform: scale(0.98);
 }
 
-tr > td:nth-child(2),
-tr > td:nth-child(4) {
+// tr > td:nth-child(2),
+// tr > td:nth-child(4) {
+//   background-color: #f8fbff;
+// }
+// tr > td:nth-child(3) {
+//   background-color: #ecf4ff;
+// }
+
+table tr:nth-of-type(even) {
   background-color: #f8fbff;
-}
-tr > td:nth-child(3) {
-  background-color: #ecf4ff;
 }
 
 .pagination-pages span.active {
