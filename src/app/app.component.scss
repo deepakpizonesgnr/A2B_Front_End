@@ -1,0 +1,28 @@
+.offcanvas-header {
+  background-color: #00378c;
+  padding: 11.5px;
+}
+
+.offcanvas-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sideMenu-item {
+  padding: 12px 16px;
+  color: #8a8a8a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 400;
+}
+.sideMenu-item.active {
+  font-weight: 600;
+  color: #fff;
+  background-color: #00378c;
+}
+.sideMenu-item.active svg path {
+  fill: #fff;
+}
