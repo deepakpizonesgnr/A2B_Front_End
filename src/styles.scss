@@ -263,3 +263,31 @@ body {
   height: 10px;
   background-color: #dbe6f5;
 }
+
+.pagination{
+    display: flex;
+    font-size: 16px;
+    height: 71px;
+    padding-top:10px;
+}
+
+// --Loder-- 
+.no-scroll {
+    overflow: hidden;
+  }
+
+  .Footer{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .totalCount{
+    padding-left: 21px;
+    padding-top: 17px;
+  }
+  .DropDown{
+    padding-left: 21px;
+    padding-top: 17px;
+  }
+ 
