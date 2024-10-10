@@ -1,7 +1,6 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -20,15 +19,17 @@ $A2B_Front_End-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$A2B_Front_End-theme: mat.define-light-theme((
-  color: (
-    primary: $A2B_Front_End-primary,
-    accent: $A2B_Front_End-accent,
-    warn: $A2B_Front_End-warn,
-  ),
-  typography: mat.define-typography-config(),
-  density: 0
-));
+$A2B_Front_End-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $A2B_Front_End-primary,
+      accent: $A2B_Front_End-accent,
+      warn: $A2B_Front_End-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -40,190 +41,200 @@ $A2B_Front_End-theme: mat.define-light-theme((
 @import "./scss/reset";
 @import "./scss/module";
 
-@import "./scss/variable"; 
+@import "./scss/variable";
 @import "./scss/layout";
 @import "./scss/component";
 @import "./scss/nav";
 @import "./scss/table";
 
-
-
-.parentDiv{
-    display: flex;
-    width : 100%;
-    gap : 20px;
-}
-
-.OrdersInformation{
+.parentDiv {
   display: flex;
-  gap:10px;
-}
-.pending{
-    border: 1px solid black;
-    padding : 5px;
+  width: 100%;
+  gap: 20px;
 }
 
-.datediv{
-    margin: 10px;
-    border: 1px solid black;
-    padding: 10px;
-    margin-right: 30px;
+.OrdersInformation {
+  display: flex;
+  gap: 10px;
+}
+.pending {
+  border: 1px solid black;
+  padding: 5px;
 }
 
-.heading{
-    padding-left : 125px;
+.datediv {
+  margin: 10px;
+  border: 1px solid black;
+  padding: 10px;
+  margin-right: 30px;
 }
 
-.statusAndMenu{
-    display: flex;
-    gap:4px;
+.heading {
+  padding-left: 125px;
 }
 
-.Pending{
-    background-color: #ffedeb ;
-    color:#f0897e;
+.statusAndMenu {
+  display: flex;
+  gap: 4px;
 }
 
-.Confirmed{
-    background-color: #dff2ff ;
-    color:#75bae9;
+.Pending {
+  background-color: #ffedeb;
+  color: #f0897e;
 }
 
-.Initiated{
-    background-color: #fff6e7 ;
-    color:#f5d29d;
+.Confirmed {
+  background-color: #dff2ff;
+  color: #75bae9;
 }
 
-.Prepared{
-    background-color: #fff4fd ;
-    color:#f191db;
+.Initiated {
+  background-color: #fff6e7;
+  color: #f5d29d;
+}
+
+.Prepared {
+  background-color: #fff4fd;
+  color: #f191db;
 }
 .Dispatched {
-    background-color: #f8e9ff ;
-    color:#b987ce;
+  background-color: #f8e9ff;
+  color: #b987ce;
 }
 
-.Delivered{
-    background-color: #ddffeb ;
-    color:#8fe8b5;
+.Delivered {
+  background-color: #ddffeb;
+  color: #8fe8b5;
 }
 
-.Cancelled{
-    background-color: #ecf0f1 ;
-    color:#8d8e8f;
+.Cancelled {
+  background-color: #ecf0f1;
+  color: #8d8e8f;
 }
 
-.status{
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    @include display-fag(flex, center);
+.status {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  @include display-fag(flex, center);
 }
 
-
-
-
- 
 .header {
-    background-color: var(--primary-theme);
-    min-height: 70px;
-    padding: 0.6rem 2.5rem 0.6rem 7rem;
-    @include display(flex, center, space-between);
-    color: $white;
-    position: relative;
- 
-    .brand {
-        @include display-fag(flex, center);
-        @include font(1.5rem);
+  background-color: var(--primary-theme);
+  min-height: 70px;
+  padding: 0.6rem 2.5rem 0.6rem 7rem;
+  @include display(flex, center, space-between);
+  color: $white;
+  position: relative;
+
+  .brand {
+    @include display-fag(flex, center);
+    @include font(1.5rem);
+  }
+
+  .navigation {
+    @include display-fag(flex, center);
+    @include font(0.9rem);
+  }
+
+  .user-block {
+    @include display-fag(flex, center, 0.6rem);
+
+    .user-img {
+      max-width: 40px;
     }
- 
-    .navigation {
-        @include display-fag(flex, center);
-        @include font(0.9rem);
+
+    .status {
+      opacity: 0.5;
     }
- 
-    .user-block {
-        @include display-fag(flex, center, 0.6rem);
- 
-        .user-img {
-            max-width: 40px;
-        }
- 
-        .status {
-            opacity: 0.5;
-        }
+  }
+
+  .sidecar-btn {
+    position: absolute;
+    top: 100%;
+    transform: translatey(-50%);
+    background-color: $theme;
+    border: 3px solid $white;
+    left: 2rem;
+    border-radius: 15rem;
+
+    min : {
+      height: 3.4rem;
+      width: 3.4rem;
     }
- 
-    .sidecar-btn {
-        position: absolute;
-        top: 100%;
-        transform: translatey(-50%);
-        background-color: $theme;
-        border: 3px solid $white;
-        left: 2rem;
-        border-radius: 15rem;
- 
-        min : {
-            height: 3.4rem;
-            width: 3.4rem;
-        }
- 
-        font-size: 1.5rem;
-        @include display(flex, center, center);
-        cursor: pointer;
-        z-index: 1;
- 
-    }
+
+    font-size: 1.5rem;
+    @include display(flex, center, center);
+    cursor: pointer;
+    z-index: 1;
+  }
 }
- 
+
 .status-menu {
-    @include display-fag(flex, center, );
-    margin-top: -2px;
-    padding-left: 7rem;
- 
-    .status-bar {
-        min-width: 12rem;
-        min-height: 2.5rem;
-        text-align: center;
-        color: white;
-        filter: url(#round);
- 
-        &:before {
-            content: "";
-            display: block;
-            min-height: 2.5rem;
-            clip-path: polygon(0 0, 100% 0, 87% 100%, 14% 100%);
-        }
- 
-        span {
-            top: -2.2rem;
-            padding: 0.4rem 2.5rem 0.6rem 2.5rem;
-            position: relative;
-        }
- 
-        &.hold {
-            &:before {
-                background-image: linear-gradient(180deg, #F9F2A0 -45.39%, #E1A747 100%);
-            }
-        }
- 
-        &.cancel {
-            &:before {
-                background-image: linear-gradient(180deg, #F9B2A0 -75.42%, #E14747 100%);
-            }
-        }
- 
-        &.success {
-            &:before {
-                background-image: linear-gradient(180deg, #C8FFF4 -42.57%, #1ABC9C 88.55%);
-            }
- 
-        }
+  @include display-fag(flex, center);
+  margin-top: -2px;
+  padding-left: 7rem;
+
+  .status-bar {
+    min-width: 12rem;
+    min-height: 2.5rem;
+    text-align: center;
+    color: white;
+    filter: url(#round);
+
+    &:before {
+      content: "";
+      display: block;
+      min-height: 2.5rem;
+      clip-path: polygon(0 0, 100% 0, 87% 100%, 14% 100%);
     }
+
+    span {
+      top: -2.2rem;
+      padding: 0.4rem 2.5rem 0.6rem 2.5rem;
+      position: relative;
+    }
+
+    &.hold {
+      &:before {
+        background-image: linear-gradient(
+          180deg,
+          #f9f2a0 -45.39%,
+          #e1a747 100%
+        );
+      }
+    }
+
+    &.cancel {
+      &:before {
+        background-image: linear-gradient(
+          180deg,
+          #f9b2a0 -75.42%,
+          #e14747 100%
+        );
+      }
+    }
+
+    &.success {
+      &:before {
+        background-image: linear-gradient(
+          180deg,
+          #c8fff4 -42.57%,
+          #1abc9c 88.55%
+        );
+      }
+    }
+  }
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-.custom-background{
-    background-color: #ecf4ff;
+html,
+body {
+  height: 100%;
 }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// .custom-background{
+//     background-color: #ecf4ff;
+// }
