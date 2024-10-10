@@ -3,13 +3,14 @@ import { provideRouter, withHashLocation } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HTTP_INTERCEPTORS, provideHttpClient, withFetch } from '@angular/common/http';
 import globalInterceptor from './interceptors/global.interceptor';
 import { GlobalErrorHandler } from './services/global-error-handler.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes, withHashLocation()),
-  provideClientHydration(),
+  provideClientHydration(),provideHttpClient(withFetch()), provideAnimationsAsync(),
   provideHttpClient(withFetch()),
   {
     provide: HTTP_INTERCEPTORS,

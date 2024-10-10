@@ -13,7 +13,7 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "ES2022",
-    "module": "ES2022",
+    "module": "ESNext",
     "useDefineForClassFields": false,
     "strict": true,
     "noImplicitAny": true,
@@ -30,7 +30,8 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "skipLibCheck" : true,
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

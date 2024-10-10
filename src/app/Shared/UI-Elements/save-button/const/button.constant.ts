@@ -1,3 +1,4 @@
 export class buttonConstants {
-    deshboard = 'dashboard'
+    deshboard = '/dashboard';
+    syncMenu = 'sync-menu'
 }

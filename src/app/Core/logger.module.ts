@@ -5,7 +5,7 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
     imports: [
       LoggerModule.forRoot({
         level: NgxLoggerLevel.DEBUG, // Set your desired log level
-        serverLoggingUrl: '/api/logs', // Optional server logging URL
+        serverLoggingUrl: 'http://localhost:3000/api/logs', // Optional server logging URL
         serverLogLevel: NgxLoggerLevel.ERROR, // Level of logs to be sent to the server
       }),
     ],

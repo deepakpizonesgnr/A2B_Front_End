@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { buttonConstants } from '../const/button.constant';
 
@@ -10,11 +10,13 @@ import { buttonConstants } from '../const/button.constant';
   templateUrl: './save-button.component.html',
   styleUrl: './save-button.component.scss'
 })
-export class SaveButtonComponent {
+export class SaveButtonComponent  {
+  @Input() name : string = '' ;
+  @Input() navigate : string = '' ;  
   constructor(private router : Router , private constant : buttonConstants){}
-  toNavigate(urlName:string){
-    if(urlName && urlName == this.constant.deshboard){
-      this.router.navigate(['/' + urlName])
+  toNavigate(){
+    if(this.navigate && this.navigate == this.constant.syncMenu && this.navigate != ''){
+      this.router.navigate(['/' + this.navigate])
     }
   }
 }

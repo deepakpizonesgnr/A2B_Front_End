@@ -1,20 +1,39 @@
-// css root colors
-:root{
-    --primary-theme : #00378C;
-    --dark-theme : #081538;
-    --secondary-theme : #F6AA32;
+:root {
+    --primary-theme: #00378C;
+    --dark-theme: #081538;
+    --secondary-theme: #F6AA32;
+    --white: #ffffff;
 }
-
+ 
 // scss color variables
 $theme : var(--primary-theme);
 $dark-theme : var(--dark-theme);
 $sec-theme : var(--secondary-theme);
-
-// display
-@mixin display($flex,$align,$justify,$gap,$dir){
+$white : var(--white);
+ 
+// display mixins
+// use for display, align and gap only
+@mixin display-fag($flex, $align, $gap : 1rem) {
+    display: $flex;
+    align-items: $align;
+    gap: $gap;
+    flex-wrap: wrap;
+}
+ 
+// use for display, align, justify and gap ,direction
+@mixin display($flex, $align, $justify : start, $gap : 1rem, $dir : row) {
     display: $flex;
     align-items: $align;
     justify-content: $justify;
     gap: $gap;
     flex-direction: $dir;
+    flex-wrap: wrap;
+}
+ 
+// font mixin
+@mixin font($size: 1rem, $weight :normal) {
+    font : {
+        size: $size;
+        weight: $weight;
+    }
 }

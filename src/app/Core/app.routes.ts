@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '../Feature/login/component/login.component';
 import { NotFoundComponent } from './404-page/not-found/not-found.component';
-import { AuthGuard } from './guards/auth.guard';
+// import { AuthGuard } from './guards/auth.guard';
 import { MenuSyncComponent } from '../Feature/menu-sync/menu-sync.component';
 import { ForgotPasswordComponent } from '../Feature/login/forgot-password/forgot-password.component';
 import { ChangePasswordComponent } from '../Feature/login/change-password/change-password.component';
-
+import { SyncMenuComponent } from '../Feature/sync-menu/component/sync-menu.component';
 
 export const routes: Routes = [
   // Add other loaded modules here
@@ -18,14 +18,18 @@ export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // Default route that redirects to login
   {
     path: 'view',
-    loadChildren: () => import('../Feature/dashboard/dashboard.module').then(m => m.DashboardModule),
-    canActivate: [AuthGuard]
+    loadChildren: () =>
+      import('../Feature/dashboard/dashboard.module').then(
+        (m) => m.DashboardModule
+      ),
+    // canActivate: [AuthGuard]
   },
+  { path: 'sync-menu', component: SyncMenuComponent },
   { path: '**', component: NotFoundComponent }, // Wildcard route to catch any invalid URLs
-]
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
