@@ -61,4 +61,39 @@
 select {
   padding : 3px 8px;
   border-radius: 8px;
+  border: 1px solid #8080804a;
 }
+
+.sr-no-column{
+  max-width: 50px !important;
+}
+
+.location-column{
+  max-width: 142px !important;
+}
+
+.city-column{
+  max-width: 96px !important;
+}
+
+.status-column{
+  max-width: 80px !important;
+}
+
+.menu-column{
+  max-width: 53px !important;
+}
+
+.sync-column{
+  max-width: 53px !important;
+}
+
+.restaurant-name-column{
+  max-width: 631px;
+}
+
+.footer-text{
+  font-size: 14px;
+  font-weight: 500;
+}
+

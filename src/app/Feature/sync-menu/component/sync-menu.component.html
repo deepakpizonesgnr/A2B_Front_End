@@ -97,35 +97,35 @@
         <div class="px-4 mt-5">
           <div class="table">
             <div class="table-scroll">
-              <table mat-table [dataSource]="rows | paginate: { itemsPerPage: 15, currentPage: page }" class="mat-elevation-z8">
+              <table mat-table [dataSource]="rows | paginate: { itemsPerPage: itemPerPage, currentPage: page }" class="mat-elevation-z8">
                 <ng-container matColumnDef="Sr No.">
-                  <th mat-header-cell *matHeaderCellDef> Sr No. </th>
-                  <td mat-cell *matCellDef="let element"> {{element.ShopCode}} </td>
+                  <th mat-header-cell *matHeaderCellDef class="sr-no-column"> Sr No. </th>
+                  <td mat-cell *matCellDef="let element" class="sr-no-column"> {{element.ShopCode}} </td>
                 </ng-container>
               
                 <ng-container matColumnDef="Resturant Name">
-                  <th mat-header-cell *matHeaderCellDef> Resturant Name </th>
-                  <td mat-cell *matCellDef="let element"> {{element.ShopName}} </td>
+                  <th mat-header-cell *matHeaderCellDef class="restaurant-name-column"> Resturant Name </th>
+                  <td mat-cell *matCellDef="let element" class="restaurant-name-column"> {{element.ShopName}} </td>
                 </ng-container>
               
                 <ng-container matColumnDef="Location">
-                  <th mat-header-cell *matHeaderCellDef> Location </th>
-                  <td mat-cell *matCellDef="let element"> {{element.Location}} </td>
+                  <th mat-header-cell *matHeaderCellDef class="location-column" > Location </th>
+                  <td mat-cell *matCellDef="let element" class="location-column" > {{element.Add1}} </td>
                 </ng-container>
               
                 <ng-container matColumnDef="City">
-                  <th mat-header-cell *matHeaderCellDef> City </th>
-                  <td mat-cell *matCellDef="let element"> {{element.City}} </td>
+                  <th mat-header-cell *matHeaderCellDef class="city-column"> City </th>
+                  <td mat-cell *matCellDef="let element" class="city-column"> {{element.StateName}} </td>
                 </ng-container>
         
                 <ng-container matColumnDef="Status">
-                  <th mat-header-cell *matHeaderCellDef> Status </th>
-                  <td mat-cell *matCellDef="let element"> {{element.Status}} </td>
+                  <th mat-header-cell *matHeaderCellDef class="status-column"> Status </th>
+                  <td mat-cell *matCellDef="let element" class="status-column"> {{element.Status}} </td>
                 </ng-container>
         
                 <ng-container matColumnDef="Menu">
-                  <th mat-header-cell *matHeaderCellDef> Menu </th>
-                  <td mat-cell *matCellDef="let element">
+                  <th mat-header-cell *matHeaderCellDef class="menu-column"> Menu </th>
+                  <td mat-cell *matCellDef="let element" class="menu-column">
                     <button (click)="getMenuList(element)"  type="button" class="view-btn" data-bs-toggle="modal" data-bs-target="#menu-modal">
                       View
                     </button>
@@ -133,8 +133,8 @@
                 </ng-container>
         
                 <ng-container matColumnDef="Sync">
-                  <th mat-header-cell *matHeaderCellDef> Sync </th>
-                  <td mat-cell *matCellDef="let element"> 
+                  <th mat-header-cell *matHeaderCellDef class="sync-column"> Sync </th>
+                  <td mat-cell *matCellDef="let element" class="sync-column"> 
                     <button (click)="openConfirmationPopup(element,constant.confirmation,constant.syncDataMessage)" type="button" class="sync-btn" data-bs-toggle="modal" data-bs-target="#globalModel">
                       Sync
                     </button>
@@ -147,19 +147,19 @@
             </div>
             <div class="Footer">
               <div class="totalCount">
-                  10/100
+                <span class="footer-text"> Total Records : 4033</span>
+                 
               </div>
               <div class="has-text-centered pagination">
                 <pagination-controls (pageChange)="page = $event"  previousLabel=""
                 nextLabel=""></pagination-controls>
               </div>
               <div class="DropDown">
+                <span class="footer-text"> Show Records : </span>
                 <select  [(ngModel)]="dropDownSelectedValue" (change)="onValueChange()">
-                  <option value="5">5</option>
-                  <option value="10">10</option>
                   <option value="15">15</option>
-                  <option value="20">20</option>
                   <option value="25">25</option>
+                  <option value="35">35</option>
                 </select>
               </div>
             </div>

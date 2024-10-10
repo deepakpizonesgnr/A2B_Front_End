@@ -45,7 +45,8 @@ export class SyncMenuComponent {
   unsubscribe$ = new Subject<void>();
   lodinMenuModel : boolean = false;
   lodinSpinner : boolean = false
-  dropDownSelectedValue : string = '5';
+  dropDownSelectedValue : string = '15';
+  itemPerPage : number = 15
 
   ngOnInit(){
     this.loading = false;
@@ -136,8 +137,10 @@ export class SyncMenuComponent {
   }
 
   onValueChange(){
-    if (this.dropDownSelectedValue !== '5') {
-      console.log('Selected value:', this.dropDownSelectedValue);
+    if (this.dropDownSelectedValue != this.itemPerPage?.toString()) {
+      this.itemPerPage = parseInt(this.dropDownSelectedValue)
     }
   }
+
+  
 }
