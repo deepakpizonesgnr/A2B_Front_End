@@ -27,6 +27,7 @@ tr {
 th,
 td {
   padding: 12px;
+  white-space: nowrap;
   text-align: left;
   border-bottom: 0px;
   font-size: 18px;
@@ -105,7 +106,7 @@ button:active {
 // }
 
 table tr:nth-of-type(even) {
-  background-color: #f8fbff;
+  background-color: #f1f7ff;
 }
 
 .pagination-pages span.active {

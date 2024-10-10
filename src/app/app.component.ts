@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +11,10 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'A2B_Front_End';
+  isLoginRoute = false;
+  constructor(private router : Router){
+    this.router.events.subscribe(() => {
+      this.isLoginRoute = this.router.url === '/login'; // Update based on your login route
+    });
+  }
 }

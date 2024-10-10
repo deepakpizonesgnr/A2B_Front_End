@@ -18,6 +18,7 @@ export interface menuRows {
 
 
 export interface SingleMenuRow {
+    ItemImage: string
     StatusResponse: string,
     ExtPlatform: string,
     State: string
@@ -41,7 +42,6 @@ export interface SingleMenuRow {
     WebItmDescription: string
     Recommended: string
     OptionGroupName: string
-    ItemImage: string
     IndWeight: number,
     CountryCode: string,
     CountryName: string

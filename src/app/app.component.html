@@ -1,3 +1,4 @@
+@if(!isLoginRoute){
 <header class="">
     <aside class="navbar navbar-expand-lg" id="nav">
         <div class="w-100 d-flex container-fluid">
@@ -28,6 +29,7 @@
         </div>
     </aside>
 </header>
+}
 <router-outlet></router-outlet>
 
 <!-- Side Car view  -->
@@ -83,7 +85,7 @@
                         </clipPath>
                     </defs>
                 </svg>
-                <a href=""  data-bs-dismiss="offcanvas" aria-label="Close">LogOut</a>
+                <a routerLink="/"  data-bs-dismiss="offcanvas" aria-label="Close">LogOut</a>
             </div>
         </div>
     </div>

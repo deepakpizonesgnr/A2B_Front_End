@@ -26,6 +26,7 @@ import { FormsModule } from '@angular/forms';
 
 export class SyncMenuComponent {
   
+  
   constructor(private service : SyncMenuService , public constant : syncMenuConstant , private logger : NGXLogger){
     this.logger.info('Starts')
     this.columns = this.constant.columnData
@@ -46,7 +47,9 @@ export class SyncMenuComponent {
   lodinMenuModel : boolean = false;
   lodinSpinner : boolean = false
   dropDownSelectedValue : string = '15';
-  itemPerPage : number = 15
+  itemPerPage : number = 15;
+  menuContainer:any;
+  menuContent: any;
 
   ngOnInit(){
     this.loading = false;
@@ -100,6 +103,10 @@ export class SyncMenuComponent {
         },
         complete: () => {
           this.lodinMenuModel = true;
+          setTimeout(() => {
+            
+            this.customWidth();
+          }, 100);
           console.log(this.constant.successfulDataFetched);
         }
       });
@@ -141,6 +148,17 @@ export class SyncMenuComponent {
       this.itemPerPage = parseInt(this.dropDownSelectedValue)
     }
   }
-
-  
+  customWidth() {
+    this.menuContainer = document.getElementById('menu-card');
+    this.menuContent = document.getElementsByClassName('menu-item-detail');
+    console.log(this.menuContainer.getBoundingClientRect());
+      if (this.menuContent && this.menuContainer.getBoundingClientRect()) {
+        const dataArray = Array.from(this.menuContent);
+        dataArray.forEach((element:any) => {
+          if(element.style){
+            element.style.width = (this.menuContainer.getBoundingClientRect().width - 275) + "px";   
+          }
+        })
+    }
+  }
 }
