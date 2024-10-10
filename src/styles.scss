@@ -48,9 +48,7 @@ $A2B_Front_End-theme: mat.define-light-theme(
 @import "./scss/table";
 
 .parentDiv {
-  display: flex;
   width: 100%;
-  gap: 20px;
 }
 
 .OrdersInformation {
@@ -60,17 +58,6 @@ $A2B_Front_End-theme: mat.define-light-theme(
 .pending {
   border: 1px solid black;
   padding: 5px;
-}
-
-.datediv {
-  margin: 10px;
-  border: 1px solid black;
-  padding: 10px;
-  margin-right: 30px;
-}
-
-.heading {
-  padding-left: 125px;
 }
 
 .statusAndMenu {
@@ -238,3 +225,41 @@ body {
 // .custom-background{
 //     background-color: #ecf4ff;
 // }
+
+.Calander {
+  border: 1px solid #e9f2ff;
+  border-radius: 12px;
+  padding: 20px 0 2px;
+  height: fit-content;
+
+  .heading h2 {
+    font-size: 24px;
+    padding: 5px 20px 20px;
+  }
+  .datediv {
+    // width: 100%;
+    padding: 14px 12px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &:nth-of-type(even) {
+      background-color: #f8fbff;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-thumb {
+  width: 8px;
+  height: 8px;
+  background-color: #0b5ed7;
+}
+::-webkit-scrollbar-track {
+  width: 10px;
+  height: 10px;
+  background-color: #dbe6f5;
+}
