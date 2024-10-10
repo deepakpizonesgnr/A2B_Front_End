@@ -9,16 +9,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ModleComponent } from '../../../Shared/popup/modle/modle.component';
 import { Subject, takeUntil } from 'rxjs';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { LoaderComponent } from '../../../Shared/UI-Elements/loader/loader.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-sync-menu',
   standalone: true,
-  imports: [SaveButtonComponent,AppLoggerModule,CommonModule,ModleComponent,MatTableModule, MatPaginatorModule],
+  imports: [SaveButtonComponent,AppLoggerModule,CommonModule,ModleComponent,MatTableModule,MatPaginatorModule,NgxPaginationModule,LoaderComponent,FormsModule ],
   templateUrl: './sync-menu.component.html',
   styleUrl: './sync-menu.component.scss',
-  providers : [syncMenuConstant,SyncMenuService,HttpClientModule ]
+  providers : [syncMenuConstant,SyncMenuService,HttpClientModule]
 })
 
 export class SyncMenuComponent {
@@ -28,36 +31,26 @@ export class SyncMenuComponent {
     this.columns = this.constant.columnData
     this.logger.info('Start Sync menu')
   }
-  purpose: string | undefined;
-  loding : boolean = false;
+  
+  @ViewChild('appModle') appModel! : ModleComponent
+  page : number = 1;
+  loading : boolean = false;
   rows : menuRows[] = []
   columns : any;
-  pagedRows: menuRows[] = [];
-  reorderable = true;
   listOfMenus : SingleMenuRow[] = []
   title: string = '';
   context: string = '';
   currentRowdata : any;
   syncMessage:string = ''
-  private unsubscribe$ = new Subject<void>();
+  unsubscribe$ = new Subject<void>();
   lodinMenuModel : boolean = false;
-  dataSource = new MatTableDataSource<menuRows>;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  lodinSpinner : boolean = false
+  dropDownSelectedValue : string = '5';
 
   ngOnInit(){
-    this.loding = false;
+    this.loading = false;
     this.listOfMenus = []
     this.setPage(); // Fetch data
-  }
-
-  ngAfterViewInit() {
-    setTimeout(() => {
-      if(this.paginator && this.dataSource){
-        this.dataSource.paginator = this.paginator;
-      }else{
-        this.logger.info('still its undefined')
-      }
-    }, 200);
   }
 
   ngOnDestroy() {
@@ -71,10 +64,8 @@ export class SyncMenuComponent {
     this.service.getData().pipe(takeUntil(this.unsubscribe$)).subscribe({
       next: (response : any) => {
         this.rows = response.data; 
-        this.dataSource = new MatTableDataSource(this.rows)
-        this.dataSource.paginator = this.paginator;
         // this.dataSource.data = this.rows; 
-        this.loding = true;
+        this.loading = true;
       },
       error: (error : any) => {
         console.error(this.constant.fechingError, error);
@@ -86,12 +77,11 @@ export class SyncMenuComponent {
   }
 
   // Below function is use to get Menu Of Perticullar Restro
-  openConfirmationPopup(row:any, title:string , context:string , purpose: string){
+  openConfirmationPopup(row:any, title:string , context:string){
    if(row){
     this.currentRowdata = row;
     this.title = title ? title : ''
     this.context = context ? context : ''
-    this.purpose = purpose;
    }
   }
 
@@ -118,15 +108,19 @@ export class SyncMenuComponent {
   // when click on sync data it will syncing data
   syncingData(){
     if(this.currentRowdata){
+      this.lodinSpinner = true
       this.service.syncData(this.currentRowdata.ShopCode,this.currentRowdata.Region).subscribe({
-        next: (response : any) => {
-          this.syncMessage = response; 
-          this.loding = true;
+        next: (response : any) => {response
+          this.syncMessage = 'Sync Data successfully'; 
+          this.loading = true;
         },
         error: (error : any) => {
           console.error(this.constant.fechingError, error);
         },
         complete: () => {
+          this.lodinSpinner = false
+          this.title = 'Syncing Complete'
+          this.context = 'Syncing Complete'
           console.log(this.constant.successfulDataFetched);
         }
       });
@@ -139,5 +133,11 @@ export class SyncMenuComponent {
 
   clickToSure(){
     this.syncingData()
+  }
+
+  onValueChange(){
+    if (this.dropDownSelectedValue !== '5') {
+      console.log('Selected value:', this.dropDownSelectedValue);
+    }
   }
 }

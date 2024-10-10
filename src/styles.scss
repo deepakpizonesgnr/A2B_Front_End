@@ -227,3 +227,31 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .custom-background{
     background-color: #ecf4ff;
 }
+
+.pagination{
+    display: flex;
+    font-size: 16px;
+    height: 71px;
+    padding-top:10px;
+}
+
+// --Loder-- 
+.no-scroll {
+    overflow: hidden;
+  }
+
+  .Footer{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .totalCount{
+    padding-left: 21px;
+    padding-top: 17px;
+  }
+  .DropDown{
+    padding-left: 21px;
+    padding-top: 17px;
+  }
+ 
